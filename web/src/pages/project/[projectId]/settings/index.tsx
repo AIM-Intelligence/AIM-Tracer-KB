@@ -85,7 +85,8 @@ export default function SettingsPage() {
             content: (
               <div className="flex flex-col gap-6">
                 <ApiKeyList projectId={project.id} />
-                <LlmApiKeyList projectId={project.id} />
+                {/* //! AIM Tracer */}
+                {/* <LlmApiKeyList projectId={project.id} /> */}
               </div>
             ),
           },
@@ -120,27 +121,28 @@ export default function SettingsPage() {
               </div>
             ),
           },
-          {
-            title: "Integrations",
-            slug: "integrations",
-            content: <Integrations projectId={project.id} />,
-          },
-          {
-            title: "Exports",
-            slug: "exports",
-            content: <BatchExportsSettingsPage projectId={project.id} />,
-          },
-          {
-            title: "Audit Logs",
-            slug: "audit-logs",
-            content: <AuditLogsSettingsPage projectId={project.id} />,
-          },
-          {
-            title: "Billing",
-            slug: "billing",
-            href: `/organization/${organization.id}/settings/billing`,
-            show: showBillingSettings,
-          },
+          //! AIM Tracer
+          // {
+          //   title: "Integrations",
+          //   slug: "integrations",
+          //   content: <Integrations projectId={project.id} />,
+          // },
+          // {
+          //   title: "Exports",
+          //   slug: "exports",
+          //   content: <BatchExportsSettingsPage projectId={project.id} />,
+          // },
+          // {
+          //   title: "Audit Logs",
+          //   slug: "audit-logs",
+          //   content: <AuditLogsSettingsPage projectId={project.id} />,
+          // },
+          // {
+          //   title: "Billing",
+          //   slug: "billing",
+          //   href: `/organization/${organization.id}/settings/billing`,
+          //   show: showBillingSettings,
+          // },
           {
             title: "Organization Settings",
             slug: "organization",

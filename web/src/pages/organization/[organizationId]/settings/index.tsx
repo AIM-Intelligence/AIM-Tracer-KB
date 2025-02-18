@@ -70,12 +70,13 @@ const OrgSettingsPage = () => {
               </div>
             ),
           },
-          {
-            title: "Billing",
-            slug: "billing",
-            content: <BillingSettings />,
-            show: showBillingSettings,
-          },
+          //! AIM Tracer
+          // {
+          //   title: "Billing",
+          //   slug: "billing",
+          //   content: <BillingSettings />,
+          //   show: showBillingSettings,
+          // },
           {
             title: "Projects",
             slug: "projects",

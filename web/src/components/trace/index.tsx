@@ -29,6 +29,7 @@ import {
   ChevronsDownUp,
   ChevronsUpDown,
   FilterIcon,
+  Grape,
   ListTree,
   Network,
   Percent,
@@ -52,6 +53,8 @@ import { useHasEntitlement } from "@/src/features/entitlements/hooks";
 import Page from "@/src/components/layouts/page";
 import { TraceGraphView } from "@/src/features/trace-graph-view/components/TraceGraphView";
 import { isLanggraphTrace } from "@/src/features/trace-graph-view/utils/isLanggraphTrace";
+import { Spinner } from '@/src/components/layouts/spinner';
+import { TraceGraphRagView } from '@/src/components/trace/AIMTraceGraphRagView';
 
 export function Trace(props: {
   observations: Array<ObservationReturnType>;
@@ -300,9 +303,11 @@ export function Trace(props: {
 export function TracePage({
   traceId,
   timestamp,
+  policies,
 }: {
   traceId: string;
   timestamp?: Date;
+  policies: any;
 }) {
   const capture = usePostHogClientCapture();
   const router = useRouter();
@@ -378,7 +383,10 @@ export function TracePage({
       />
     );
 
-  if (!trace.data) return <div className="p-3">Loading...</div>;
+   //! AIM Intelligence
+   if (!trace.data) return <div className="flex justify-center items-center h-full">
+   <Spinner message="Loading trace" />
+ </div>;
 
   return (
     <Page
@@ -492,6 +500,11 @@ export function TracePage({
             <Network className="mr-1 h-4 w-4"></Network>
             Tree
           </TabsBarTrigger>
+          {/* //! AIM Intelligence */}
+          <TabsBarTrigger value="graphrag">
+            <Grape className="mr-1 h-4 w-4"></Grape>
+            Policies
+          </TabsBarTrigger>
           <TabsBarTrigger value="timeline">
             <ListTree className="mr-1 h-4 w-4"></ListTree>
             Timeline
@@ -517,6 +530,13 @@ export function TracePage({
             projectId={trace.data.projectId}
             observations={trace.data.observations}
           />
+        </TabsBarContent>
+         {/*//! AIM Intelligence */}
+         <TabsBarContent
+          value="graphrag"
+          className="mt-5 h-full flex-1 overflow-y-auto md:overflow-hidden md:overflow-y-hidden"
+        >
+          <TraceGraphRagView trace={trace.data} traceId={trace.data.id} policies={policies} />
         </TabsBarContent>
         <TabsBarContent
           value="timeline"

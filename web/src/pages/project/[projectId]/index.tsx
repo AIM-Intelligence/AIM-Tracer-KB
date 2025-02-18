@@ -174,7 +174,8 @@ export default function Dashboard() {
             onChange={useDebounce(setUserFilterState)}
           />
         </div>
-        {uiCustomization?.feedbackHref === undefined && (
+        {/* //! AIM Tracer */}
+        {/* {uiCustomization?.feedbackHref === undefined && (
           <FeedbackButtonWrapper
             title="Request Chart"
             description="Your feedback matters! Let the Langfuse team know what additional data or metrics you'd like to see in your dashboard."
@@ -194,9 +195,18 @@ export default function Dashboard() {
               Request Chart
             </Button>
           </FeedbackButtonWrapper>
-        )}
+        )} */}
       </div>
       <div className="grid w-full grid-cols-1 gap-3 overflow-hidden lg:grid-cols-2 xl:grid-cols-6">
+        {/* //! AIM Tracer */}
+        {!disableExpensiveDashboardComponents && (
+          <ScoreAnalytics
+            className="col-span-1 flex-auto justify-between lg:col-span-full"
+            agg={agg}
+            projectId={projectId}
+            globalFilterState={mergedFilterState}
+          />
+        )}
         <TracesBarListChart
           className="col-span-1 xl:col-span-2"
           projectId={projectId}
@@ -256,14 +266,15 @@ export default function Dashboard() {
             globalFilterState={mergedFilterState}
           />
         )}
-        {!disableExpensiveDashboardComponents && (
+         {/* //! AIM Tracer */}
+        {/* {!disableExpensiveDashboardComponents && (
           <ScoreAnalytics
             className="col-span-1 flex-auto justify-between lg:col-span-full"
             agg={agg}
             projectId={projectId}
             globalFilterState={mergedFilterState}
           />
-        )}
+        )} */}
       </div>
     </Page>
   );

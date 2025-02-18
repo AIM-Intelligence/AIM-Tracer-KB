@@ -1,6 +1,7 @@
 export const planLabels = {
   oss: "OSS",
-  "cloud:hobby": "Hobby",
+  //! AIM Tracer
+  "cloud:hobby": "KB",
   "cloud:pro": "Pro",
   "cloud:team": "Team",
   "self-hosted:pro": "Pro (self-hosted)",

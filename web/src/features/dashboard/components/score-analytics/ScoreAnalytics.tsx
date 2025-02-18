@@ -45,6 +45,13 @@ export function ScoreAnalytics(props: {
           skipBatch: true,
         },
       },
+      //! AIM Intelligence
+      onSuccess: (data) => {
+        if (data && selectedDashboardScoreKeys.length === 0) {
+          const allKeys = data.map((score) => score.key);
+          setSelectedDashboardScoreKeys(allKeys);
+        }
+      },
     },
   );
 

@@ -278,7 +278,8 @@ export default function Layout(props: PropsWithChildren) {
     <>
       <Head>
         <title>
-          {activePathName ? `${activePathName} | Langfuse` : "Langfuse"}
+          {/* //! AIM Intelligence */}
+          {activePathName ? `${activePathName} | AIM Intelligence` : "AIM Intelligence"}
         </title>
         <link
           rel="apple-touch-icon"
