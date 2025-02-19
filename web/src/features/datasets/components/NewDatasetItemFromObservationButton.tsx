@@ -104,27 +104,30 @@ export const NewDatasetItemFromTrace = (props: {
           </DropdownMenu>
         </div>
       ) : (
-        <Button
-          onClick={() => {
-            setIsFormOpen(true);
-            capture("dataset_item:new_from_trace_form_open", {
-              object: props.observationId ? "observation" : "trace",
-            });
-          }}
-          variant="secondary"
-          disabled={!hasAccess}
-        >
-          {hasAccess ? (
-            <PlusIcon
-              className={cn("-ml-0.5 mr-1.5 h-4 w-4")}
-              aria-hidden="true"
-            />
-          ) : null}
-          Add to dataset
-          {!hasAccess ? (
-            <LockIcon className={cn("ml-1.5 h-3 w-3")} aria-hidden="true" />
-          ) : null}
-        </Button>
+        //! AIM-Tracer
+        // <Button
+        //   onClick={() => {
+        //     setIsFormOpen(true);
+        //     capture("dataset_item:new_from_trace_form_open", {
+        //       object: props.observationId ? "observation" : "trace",
+        //     });
+        //   }}
+        //   variant="secondary"
+        //   disabled={!hasAccess}
+        // >
+        //   {hasAccess ? (
+        //     <PlusIcon
+        //       className={cn("-ml-0.5 mr-1.5 h-4 w-4")}
+        //       aria-hidden="true"
+        //     />
+        //   ) : null}
+        //   Add to dataset
+        //   {!hasAccess ? (
+        //     <LockIcon className={cn("ml-1.5 h-3 w-3")} aria-hidden="true" />
+        //   ) : null}
+        // </Button>
+        <></>
+        //!
       )}
       <Dialog open={hasAccess && isFormOpen} onOpenChange={setIsFormOpen}>
         <DialogContent className="h-[calc(100vh-5rem)] max-h-none w-[calc(100vw-5rem)] max-w-none">

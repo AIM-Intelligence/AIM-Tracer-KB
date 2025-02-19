@@ -315,13 +315,15 @@ export const ObservationPreview = ({
                     type="observation"
                     hasGroupedButton={hasEntitlement}
                   />
-                  {hasEntitlement && (
+                  {/* //! AIM-Tracer */}
+                  {/* {hasEntitlement && (
                     <CreateNewAnnotationQueueItem
                       projectId={projectId}
                       objectId={preloadedObservation.id}
                       objectType={AnnotationQueueObjectType.OBSERVATION}
                     />
-                  )}
+                  )} */}
+                  {/* //! */}
                 </div>
 
                 {observationWithInputAndOutput.data?.type === "GENERATION" && (

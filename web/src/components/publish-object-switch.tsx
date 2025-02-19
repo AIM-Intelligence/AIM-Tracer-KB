@@ -89,11 +89,29 @@ const Base = (props: {
 }) => {
   const [isCopied, setIsCopied] = useState(false);
 
-  const copyUrl = () => {
-    setIsCopied(true);
-    void navigator.clipboard.writeText(window.location.href);
-    setTimeout(() => setIsCopied(false), 2500);
+  //! AIM-Tracer
+  const copyUrl = async () => {
+    try {
+      const url = window.location.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2500);
+    } catch (error) {
+      console.error('Failed to copy:', error);
+      // Optionally show an error message to the user
+    }
   };
+  //!
 
   const handleOnClick = () => {
     if (props.isLoading) return;

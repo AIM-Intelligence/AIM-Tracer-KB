@@ -102,7 +102,8 @@ export function AnnotateDrawer({
           <Button
             variant="secondary"
             disabled={!hasAccess || showSaving}
-            className={hasGroupedButton ? "rounded-r-none" : ""}
+            //! AIM-Tracer
+            className={hasGroupedButton ? "rounded" : ""}
             onClick={() => {
               setIsDrawerOpen(true);
               capture(

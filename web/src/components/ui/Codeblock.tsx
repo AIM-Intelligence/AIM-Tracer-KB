@@ -48,11 +48,28 @@ export const programmingLanguages: languageMap = {
 
 const CodeBlock: FC<Props> = memo(({ language, value, theme, className }) => {
   const [isCopied, setIsCopied] = useState(false);
-  const handleCopy = () => {
-    setIsCopied(true);
-    void navigator.clipboard.writeText(value ?? "");
-    setTimeout(() => setIsCopied(false), 1000);
+  //! AIM-Tracer
+  const handleCopy = async () => {
+    try {
+      setIsCopied(true);
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        await navigator.clipboard.writeText(value ?? "");
+      } else {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement("textarea");
+        textArea.value = value ?? "";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+      setTimeout(() => setIsCopied(false), 1000);
+    } catch (error) {
+      console.error("Failed to copy text:", error);
+      setIsCopied(false);
+    }
   };
+  //!
 
   return (
     <div className="codeblock relative w-full overflow-hidden rounded border font-sans dark:bg-zinc-950">

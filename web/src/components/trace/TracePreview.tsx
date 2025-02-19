@@ -195,13 +195,15 @@ export const TracePreview = ({
                     setEmptySelectedConfigIds={setEmptySelectedConfigIds}
                     hasGroupedButton={hasEntitlement}
                   />
-                  {hasEntitlement && (
+                  {/* //! AIM-Tracer */}
+                  {/* {hasEntitlement && (
                     <CreateNewAnnotationQueueItem
                       projectId={trace.projectId}
                       objectId={trace.id}
                       objectType={AnnotationQueueObjectType.TRACE}
                     />
-                  )}
+                  )} */}
+                  {/* //! */}
                 </div>
               </>
             )}

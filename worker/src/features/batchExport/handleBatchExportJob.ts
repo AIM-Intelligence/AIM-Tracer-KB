@@ -425,6 +425,10 @@ export const handleBatchExportJob = async (
     expiresInSeconds,
   });
 
+  //! AIM-Tracer
+  console.log("signedUrluiewhfuiwehfwuihuiewhfui", signedUrl);
+  //!
+
   logger.info(`Batch export file ${fileName} uploaded to S3`);
 
   // Update job status

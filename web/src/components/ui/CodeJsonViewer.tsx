@@ -37,11 +37,28 @@ export function JSONView(props: {
       ? 100_000_000 // if null, show all (100M chars)
       : (props.collapseStringsAfterLength ?? 500);
 
-  const handleCopy = () => {
-    setIsCopied(true);
-    void navigator.clipboard.writeText(stringifyJsonNode(parsedJson));
-    setTimeout(() => setIsCopied(false), 1000);
+  //! AIM-Tracer
+  const handleCopy = async () => {
+   
+    try {
+      if (navigator?.clipboard) {
+        await navigator.clipboard.writeText(stringifyJsonNode(parsedJson));
+      } else {
+        // Fallback for environments where clipboard API is not available
+        const textArea = document.createElement('textarea');
+        textArea.value = stringifyJsonNode(parsedJson);
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 1000);
+    } catch (error) {
+      console.error('Failed to copy text:', error);
+    }
   };
+  //!
 
   return (
     <div className={cn("rounded-md border", props.className)}>
@@ -150,11 +167,29 @@ export function CodeView(props: {
   const [isCopied, setIsCopied] = useState(false);
   const [isCollapsed, setCollapsed] = useState(props.defaultCollapsed);
 
-  const handleCopy = () => {
-    setIsCopied(true);
-    void navigator.clipboard.writeText(props.content ?? "");
-    setTimeout(() => setIsCopied(false), 1000);
+  //! AIM-Tracer
+  const handleCopy = async () => {
+    if (!props.content) return;
+
+    try {
+      if (navigator?.clipboard) {
+        await navigator.clipboard.writeText(props.content);
+      } else {
+        // Fallback for environments where clipboard API is not available
+        const textArea = document.createElement('textarea');
+        textArea.value = props.content;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 1000);
+    } catch (error) {
+      console.error('Failed to copy text:', error);
+    }
   };
+  //!
 
   const handleShowAll = () => setCollapsed(!isCollapsed);
 

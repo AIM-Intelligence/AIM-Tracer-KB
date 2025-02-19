@@ -280,15 +280,35 @@ export function MarkdownView({
   const { resolvedTheme: theme } = useTheme();
   const { setIsMarkdownEnabled } = useMarkdownContext();
 
-  const handleCopy = () => {
-    setIsCopied(true);
-    const rawText =
-      typeof markdown === "string"
-        ? markdown
-        : parseOpenAIContentParts(markdown);
-    void navigator.clipboard.writeText(rawText);
-    setTimeout(() => setIsCopied(false), 1000);
+  //! AIM-Tracer
+  const handleCopy = async () => {
+    
+    try {
+      setIsCopied(true);
+      const rawText =
+        typeof markdown === "string"
+          ? markdown
+          : parseOpenAIContentParts(markdown);
+          
+      if (navigator?.clipboard) {
+        await navigator.clipboard.writeText(rawText);
+      } else {
+        // Fallback method
+        const textArea = document.createElement('textarea');
+        textArea.value = rawText;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      
+      setTimeout(() => setIsCopied(false), 1000);
+    } catch (error) {
+      console.error('Failed to copy text:', error);
+      setIsCopied(false);
+    }
   };
+  //!
 
   return (
     <div

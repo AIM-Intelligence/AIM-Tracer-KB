@@ -29,30 +29,69 @@ export const BatchExportTableButton: React.FC<BatchExportTableButtonProps> = (
   props,
 ) => {
   const [isExporting, setIsExporting] = React.useState(false);
-  const createExport = api.batchExport.create.useMutation({
+
+   //! AIM-Tracer
+  // const createExport = api.batchExport.create.useMutation({
+  //   onSettled: () => {
+  //     setIsExporting(false);
+  //   },
+  //   onSuccess: () => {
+  //     showSuccessToast({
+  //       title: "Export queued",
+  //       description: "You will receive an email when the export is ready.",
+  //       duration: 10000,
+  //       link: {
+  //         href: `/project/${props.projectId}/settings/exports`,
+  //         text: "View exports",
+  //       },
+  //     });
+  //   },
+  // });
+
+  const createAimExport = api.batchExport.create.useMutation({
     onSettled: () => {
+    },
+    onSuccess: (data) => {
+      // Helper function to trigger download
+      const downloadFile = (url: string, format: string) => {
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `export.${format.toLowerCase()}`; // Set filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+      if (data?.url) {
+        downloadFile(data.url, data.format ?? 'csv');
+        showSuccessToast({
+          title: "Download Success",
+          description: "",
+          duration: 3000,
+        });
+      }
       setIsExporting(false);
     },
-    onSuccess: () => {
-      showSuccessToast({
-        title: "Export queued",
-        description: "You will receive an email when the export is ready.",
-        duration: 10000,
-        link: {
-          href: `/project/${props.projectId}/settings/exports`,
-          text: "View exports",
-        },
-      });
-    },
   });
+  //!
+
+
+
   const hasAccess = useHasProjectAccess({
     projectId: props.projectId,
     scope: "batchExports:create",
   });
 
   const handleExport = async (format: BatchExportFileFormat) => {
+    //! AIM-Tracer
+    await showSuccessToast({
+      title: "Download Started",
+      description: "Please wait while we prepare your file for download...",
+      duration: 5000,
+    });
+    //!
+
     setIsExporting(true);
-    await createExport.mutateAsync({
+    await createAimExport.mutateAsync({
       projectId: props.projectId,
       name: `${new Date().toISOString()} - ${props.tableName} as ${format}`,
       format,
