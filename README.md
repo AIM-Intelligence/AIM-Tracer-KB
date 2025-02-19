@@ -4,7 +4,7 @@
    <div>
       <h3>
          <a href="https://cloud.langfuse.com">
-            <strong>Langfuse Cloud</strong>
+            <strong>Langfuse Cloud Test</strong>
          </a> · 
          <a href="https://langfuse.com/docs/deployment/self-host">
             <strong>Self Host</strong>
