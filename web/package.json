@@ -155,7 +155,7 @@
     "tailwindcss-animate": "^1.0.7",
     "unified": "^11.0.5",
     "use-query-params": "^2.2.1",
-    "uuid": "^9.0.1",
+    "uuid": "^11.1.0",
     "vaul": "^0.9.1",
     "vis-network": "^9.1.9",
     "zod": "^3.23.8"
