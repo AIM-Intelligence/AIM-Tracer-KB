@@ -58,15 +58,15 @@ const LangfuseLogotypeOrCustomized = ({ size }: { size: "sm" | "xl" }) => {
 
   return (
     <div className="flex items-center">
-      <LangfuseIcon size={size === "sm" ? 16 : 20} />
+      <LangfuseIcon size={size === "sm" ? 24 : 28} />
       <span
         className={cn(
           "ml-2 font-mono font-semibold leading-none group-data-[collapsible=icon]:hidden",
-          size === "sm" ? "text-sm" : "text-xl",
+          size === "sm" ? "text-md" : "text-3xl",
         )}
       >
         {/* //! AIM Tracer */}
-        AIM-Tracer
+        AIM-Guard
       </span>
     </div>
   );

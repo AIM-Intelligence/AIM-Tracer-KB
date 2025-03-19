@@ -68,7 +68,7 @@ export const batchExportRouter = createTRPCRouter({
         //! AIM-Tracer
         // Poll for completion
         let completedExport = null;
-        for (let i = 0; i < 500; i++) {
+        for (let i = 0; i < 50; i++) {
           completedExport = await ctx.prisma.batchExport.findUnique({
             where: {
               id: exportJob.id,

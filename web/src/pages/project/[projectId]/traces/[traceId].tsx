@@ -12,7 +12,7 @@ export default function Trace() {
       : undefined;
 
   // ! AIM Intelligence
-  const [policies, setPolicies] = useState<any[]>([]);
+  const [policies, setPolicies] = useState<any | null>(null);
 
   const fetchPolicies = useCallback(async () => {
     try {
